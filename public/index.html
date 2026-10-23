@@ -1,0 +1,236 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SmartMatch | Candidate Intelligence Platform</title>
+    <meta name="description" content="Compare candidate resumes with job requirements, discover skill gaps, and rank potential matches.">
+
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <header class="navbar">
+        <a href="/" class="logo">Smart<span>Match</span></a>
+        <div class="nav-label">Candidate Intelligence Platform</div>
+    </header>
+
+    <main class="container">
+
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <p class="tag">SMART HIRING STARTS HERE</p>
+
+            <h1>
+                Find your next<br>
+                <span>best candidate.</span>
+            </h1>
+
+            <p class="subtitle">
+                Compare candidate resumes against job requirements,
+                discover skill gaps, and rank the best matches.
+            </p>
+        </section>
+
+        <!-- RESUME MATCHING FORM -->
+        <section class="form-card">
+            <h2>Start Candidate Matching</h2>
+
+            <p class="card-description">
+                Enter the job requirements and upload up to 20 PDF resumes,
+                or try the demo with sample candidates.
+            </p>
+
+            <form id="matchForm">
+
+                <label for="jobDescription">Job Description</label>
+
+                <textarea
+                    id="jobDescription"
+                    name="jobDescription"
+                    placeholder="Example: Java developer with Java, SQL, Spring Boot and REST API skills..."
+                    required
+                ></textarea>
+
+                <label for="resumes">Candidate Resumes (PDF)</label>
+
+                <div class="upload-box">
+                    <input
+                        type="file"
+                        id="resumes"
+                        name="resumes"
+                        accept=".pdf,application/pdf"
+                        multiple
+                        required
+                    >
+
+                    <p>Select multiple PDF resumes to compare candidates.</p>
+                    <p id="fileCount">No files selected</p>
+                </div>
+
+                <button type="submit" id="matchButton">
+                    Analyze &amp; Rank Candidates
+                </button>
+
+                <button
+                    type="button"
+                    id="demoButton"
+                    class="demo-button"
+                >
+                    Try Demo with Sample Candidates
+                </button>
+
+            </form>
+
+            <div
+                id="statusMessage"
+                class="status"
+                role="status"
+                aria-live="polite"
+            ></div>
+        </section>
+
+        <!-- CANDIDATE DASHBOARD -->
+        <section id="dashboard" hidden>
+
+            <div class="section-heading">
+                <div>
+                    <p class="tag">YOUR RESULTS</p>
+                    <h2>Candidate Dashboard</h2>
+                </div>
+
+                <button
+                    type="button"
+                    id="downloadButton"
+                    class="download-button"
+                >
+                    Download CSV Report
+                </button>
+            </div>
+
+            <!-- DASHBOARD STATISTICS -->
+            <div class="stats-grid">
+
+                <article class="stat-card">
+                    <p>Resumes Analyzed</p>
+                    <h3 id="totalCandidates">0</h3>
+                </article>
+
+                <article class="stat-card">
+                    <p>Average Match</p>
+                    <h3 id="averageScore">0%</h3>
+                </article>
+
+                <article class="stat-card">
+                    <p>Top Match</p>
+                    <h3 id="topScore">0%</h3>
+                </article>
+
+            </div>
+
+            <!-- RANKED CANDIDATES -->
+            <section class="results-panel">
+
+                <h2>Ranked Candidates</h2>
+
+                <p class="card-description">
+                    Candidates are ranked by detected job-skill matches.
+                </p>
+
+                <div id="demoNotice" class="demo-notice" hidden>
+                    Demo data only — these are fictional sample candidates,
+                    not real resume analysis results.
+                </div>
+
+                <!-- SEARCH AND FILTER -->
+                <div class="candidate-filters">
+
+                    <div class="filter-field">
+                        <label for="candidateSearch">
+                            Search Candidate
+                        </label>
+
+                        <input
+                            type="search"
+                            id="candidateSearch"
+                            placeholder="Search by candidate or resume name..."
+                        >
+                    </div>
+
+                    <div class="filter-field">
+                        <label for="minimumScore">
+                            Minimum Match Score
+                        </label>
+
+                        <select id="minimumScore">
+                            <option value="0">All candidates</option>
+                            <option value="40">40% and above</option>
+                            <option value="50">50% and above</option>
+                            <option value="60">60% and above</option>
+                            <option value="70">70% and above</option>
+                            <option value="80">80% and above</option>
+                        </select>
+                    </div>
+
+                    <button
+                        type="button"
+                        id="resetFilters"
+                        class="download-button"
+                    >
+                        Reset Filters
+                    </button>
+
+                </div>
+
+                <p
+                    id="filterSummary"
+                    class="card-description"
+                    aria-live="polite"
+                ></p>
+
+                <div id="candidateList"></div>
+
+                <p id="noCandidatesMessage" class="empty-message" hidden>
+                    No candidates match your search or selected score.
+                    Try changing your filters.
+                </p>
+
+            </section>
+
+            <!-- JOB SKILLS -->
+            <section class="results-panel">
+                <h2>Job Skills</h2>
+                <p class="card-description">
+                    Skills identified from the job description.
+                </p>
+
+                <div id="jobSkills" class="skill-list"></div>
+            </section>
+
+            <!-- FILES THAT FAILED -->
+            <section id="failedSection" class="results-panel" hidden>
+                <h2>Files Not Analyzed</h2>
+                <div id="failedList"></div>
+            </section>
+
+            <!-- DISCLAIMER -->
+            <p class="disclaimer">
+                SmartMatch uses rule-based skill matching for this prototype.
+                Scores are an initial screening aid, not a hiring decision.
+                Always review resumes and assess candidates fairly.
+            </p>
+
+        </section>
+
+        <footer>
+            SmartMatch — Skill-Based Candidate Matching
+        </footer>
+
+    </main>
+
+    <script src="/script.js"></script>
+</body>
+</html>
+```
